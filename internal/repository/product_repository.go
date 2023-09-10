@@ -27,7 +27,7 @@ func (r *productRepository) Create(ctx context.Context, product *model.Product) 
 
 	tx := r.db.WithContext(ctx).Begin()
 
-	err := r.db.Create(&product).Error
+	err := tx.Create(&product).Error
 	if err != nil {
 		logger.Error(err)
 		tx.Rollback()
@@ -51,7 +51,7 @@ func (r *productRepository) GetAll(ctx context.Context, sortType model.SearchPro
 	})
 	sortTypeStr, orderTypeStr := model.ParseSorterToString(sortType, orderType)
 
-	err = r.db.WithContext(ctx).Order(fmt.Sprint(sortTypeStr, " ", orderTypeStr)).Find(products).Error
+	err = r.db.WithContext(ctx).Order(fmt.Sprintf("%s %s", sortTypeStr, orderTypeStr)).Find(&products).Error
 	if err != nil {
 		logger.Error(err)
 		return nil, err

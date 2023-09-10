@@ -1,0 +1,21 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: 21cc13c57e83
+    hostname: 21cc13c57e83
+    mac_address: 02:42:ac:11:00:02
+    environment:
+      POSTGRES_PASSWORD: root
+      PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/15/bin
+      GOSU_VERSION: 1.16
+      LANG: en_US.utf8
+      PG_MAJOR: 15
+      PG_VERSION: 15.4-1.pgdg120+1
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    runtime: runc
+    detach: true

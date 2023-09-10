@@ -1,7 +1,6 @@
 package httpsvc
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"github.com/fajarachmadyusup13/product-management/internal/model"
@@ -40,11 +39,5 @@ func (h *HTTPService) SearchAllProductsHandler(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	j, err := json.Marshal(res)
-	if err != nil {
-		logrus.Error(err)
-		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
-	}
-
-	return c.JSON(http.StatusOK, string(j))
+	return c.JSON(http.StatusOK, res)
 }

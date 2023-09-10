@@ -11,13 +11,13 @@ type (
 )
 
 type Product struct {
-	ID          int64
-	Name        string
-	Price       float64
-	Description string
-	Quantity    int64
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	ID          int64     `json:"id" gorm:"PRIMARY_KEY"`
+	Name        string    `json:"name"`
+	Price       float64   `json:"price"`
+	Description string    `json:"description"`
+	Quantity    int64     `json:"quantity"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }
 
 const (
@@ -69,7 +69,7 @@ func ParseSorterToString(sortType SearchProductSortType, orderType SearchProduct
 
 	switch sortType {
 	case SortProductByCreatedAt:
-		sortTypeStr = "createdAt"
+		sortTypeStr = "created_at"
 	case SortProductByName:
 		sortTypeStr = "name"
 	case SortProductByPrice:
